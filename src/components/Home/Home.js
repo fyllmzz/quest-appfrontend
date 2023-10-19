@@ -31,13 +31,13 @@ function Home(){
         return(
             <div>
                 {/*props
-parets ve child arasındaki ilişkiyi sağlar
-home parent component, post ise child component
-*/}
+                 parets ve child arasındaki ilişkiyi sağlar
+                 home parent component, post ise child component
+                 */}
 
                 <Container fixed className="container">
                     {postList.map(post => (
-                        <Post title={post.title} text={post.text}></Post>
+                        <Post title={post.title} text={post.text} userId={post.userId} userName={post.userName}></Post>
 
                     ))}
                 </Container>

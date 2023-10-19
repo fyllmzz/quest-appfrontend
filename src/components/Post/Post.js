@@ -13,7 +13,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
 function Post(props){
-    const{title, text}=props;
+    const{title, text, userName,userId}=props;
     const [expanded, setExpanded] = React.useState(false);
     const currentDate = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -30,7 +30,7 @@ function Post(props){
                 <CardHeader
                     avatar={
                         <Avatar  sx={{ backgroundColor: red[500] }} aria-label="recipe">
-                            R
+                            {userName.charAt(0).toUpperCase()}
                         </Avatar>
                     }
                     // action={
@@ -38,7 +38,7 @@ function Post(props){
                     //         <MoreVertIcon />
                     //     </IconButton>
                     // }
-                    title={title}
+                    title={userName}
                     // subheader={formattedDate }
                 />
 
