@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/*.postContainer{*/
+/*  border-width: 2px;*/
+/*  border-color: black ;*/
+/*  border-style: solid;*/
+/*}*/
+.link{
+  text-decoration: none;
+  box-shadow: none;
+  color: white;
+}
+.title{
+  flex-grow: 1;
+  text-align: left;
+}
+.container{
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(173, 225, 245, 0.76);
+  height: 100vh;
+}
