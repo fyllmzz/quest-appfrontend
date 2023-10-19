@@ -12,16 +12,20 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import InsertCommentIcon from '@mui/icons-material/InsertComment';
+import {Link} from "react-router-dom";
 function Post(props){
     const{title, text, userName,userId}=props;
     const [expanded, setExpanded] = React.useState(false);
     const currentDate = new Date();
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = currentDate.toLocaleDateString('tr-TR', options);
+    const [selectFavorites, setSelectFavorites] = React.useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-
+    const handleLike = () => {
+        setSelectFavorites(!selectFavorites);
+    };
 
     return(
         <div>
@@ -29,17 +33,14 @@ function Post(props){
             <Card sx={{ width: 800 ,textAlign:"left"}} >
                 <CardHeader
                     avatar={
+                        <Link className="link" to={{pathname:"/users/"+userId}}>
                         <Avatar  sx={{ backgroundColor: red[500] }} aria-label="recipe">
                             {userName.charAt(0).toUpperCase()}
                         </Avatar>
+                    </Link>
+
                     }
-                    // action={
-                    //     <IconButton aria-label="settings">
-                    //         <MoreVertIcon />
-                    //     </IconButton>
-                    // }
                     title={userName}
-                    // subheader={formattedDate }
                 />
 
                 <CardContent>
@@ -48,12 +49,13 @@ function Post(props){
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing >
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
+                    <IconButton
+                        onClick={handleLike}
+                        aria-label="add to favorites"
+                        //color={selectFavorites ? "warning" :"default"}
+                    >
+                        <FavoriteIcon style={selectFavorites ? {color:"red"} : null} />
                     </IconButton>
-                    {/*<IconButton aria-label="share">*/}
-                    {/*    <ShareIcon />*/}
-                    {/*</IconButton>*/}
                     <IconButton
                         expand={expanded}
                         onClick={handleExpandClick}

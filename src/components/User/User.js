@@ -6,7 +6,7 @@ function User(){
 
 return(
 
-    <div>
+    <div style={{textAlign:"center"}}>
         user : {userId}
 
     </div>
