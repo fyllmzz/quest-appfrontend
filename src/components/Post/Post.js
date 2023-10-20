@@ -30,7 +30,7 @@ function Post(props){
     return(
         <div>
 
-            <Card sx={{ width: 800 ,textAlign:"left"}} >
+            <Card sx={{ width: 800 ,textAlign:"left", margin:"20px"}} >
                 <CardHeader
                     avatar={
                         <Link className="link" to={{pathname:"/users/"+userId}}>
