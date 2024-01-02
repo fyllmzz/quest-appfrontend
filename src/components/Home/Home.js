@@ -1,27 +1,48 @@
 import React, {useEffect, useState} from "react";
 import Post from "../Post/Post";
-import Container from '@mui/material/Container';
+import PostForm from "../Post/PostForm";
+
 function Home(){
 
     const [ error , setError ] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [postList, setPostList] =useState([]);
 
-    useEffect(() => {
+    const refreshPosts = () => {
         fetch("/posts")
-            .then(res=>res.json())
+            .then(res => res.json())
             .then(
-                (result)=>{
-                    setIsLoaded(true)
+                (result) => {
+                    setIsLoaded(true);
                     setPostList(result)
-
                 },
-                (error)=>{
-                    setIsLoaded(true)
-                    setError(error)
+                (error) => {
+                    console.log(error)
+                    setIsLoaded(true);
+                    setError(error);
                 }
             )
-    },[])
+    }
+
+    useEffect(() => {
+        refreshPosts()
+    }, [])
+
+    // useEffect(() => {
+    //     fetch("/posts")
+    //         .then(res=>res.json())
+    //         .then(
+    //             (result)=>{
+    //                 setIsLoaded(true)
+    //                 setPostList(result)
+    //
+    //             },
+    //             (error)=>{
+    //                 setIsLoaded(true)
+    //                 setError(error)
+    //             }
+    //         )
+    // },[])
 
     if(error){
         return <div> ERRORR</div>;
@@ -30,6 +51,7 @@ function Home(){
     }else {
         return(
                 <div className="container">
+                    <PostForm userId = {localStorage.getItem("currentUser")}  refreshPosts = {refreshPosts}/>
                     {postList.map(post => (
                         <Post title={post.title} text={post.text} userId={post.userId} userName={post.userName}></Post>
 

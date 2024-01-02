@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {FormControl, FormHelperText, Input, InputLabel} from "@mui/material";
 import Button from "@mui/material/Button";
-import router from "react-router-dom/es/Router";
-import {toast, ToastContainer} from "react-toastify";
+
 
 
 function Auth(){
@@ -28,19 +27,27 @@ function Auth(){
                 }),
         })
             .then((res)=>res.json())
-            .then((result) => {localStorage.setItem("tokenKey",result.message);
-                // localStorage.setItem("refreshKey",result.refreshToken);
-                localStorage.setItem("currentUser",result.userId);
-                localStorage.setItem("userName",username)})
+            .then((result) => {
+                if (result.message === "Kullanıcı adı zaten kullanımda.") {
+                    alert(result.message);
+                } else {
+                    localStorage.setItem("tokenKey", result.message);
+                    // localStorage.setItem("refreshKey", result.refreshToken);
+                    localStorage.setItem("currentUser", result.userId);
+                    localStorage.setItem("userName", username);
+                    window.location.reload();
+                }
+            })
             .catch((err)=>console.log(err))
     }
 
 
     const handleRegister =()=>{
-        if(username != "" && password != "" ) {
+        if(username !== "" && password !=="" ) {
             sendRequest("register");
             setUsername("");
             setPassword("");
+            //window.location.reload()
 
         } else {
 
@@ -49,11 +56,12 @@ function Auth(){
 
     }
     const handleLogin=()=>{
-        if(username != "" && password != "" ) {
+        if(username !== "" && password !=="" ) {
 
             sendRequest("login");
             setUsername("");
             setPassword("");
+            window.location.reload()
 
         } else {
             alert("Lütfen boş alanları doldurunuz.")
