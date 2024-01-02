@@ -61,7 +61,7 @@ function Auth(){
             sendRequest("login");
             setUsername("");
             setPassword("");
-            window.location.reload()
+            //window.location.reload()
 
         } else {
             alert("Lütfen boş alanları doldurunuz.")
