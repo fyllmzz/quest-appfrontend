@@ -84,20 +84,20 @@ function Auth(){
                    value={password}
                    onChange={(e) => handlePassword(e.target.value)}
                    type="password"
-            />
-            <Button variant="contained"
-                    style={{marginTop:60,
-                    background:'linear-gradient(45deg,#2196F3 30%, #21CBF3 90%)',
-                    color:'white'}}
-                    onClick={handleRegister}
-            > Kayıt Ol </Button>
+            />   <Button variant="contained"
+                         style={{marginTop:60,
+                             background:'linear-gradient(45deg,#2196F3 30%, #21CBF3 90%)',
+                             color:'white'}}
+                         onClick={handleLogin}
+        > Giriş Yap </Button>
+
             <FormHelperText>Hesabın Var Mı? </FormHelperText>
             <Button variant="contained"
-                    style={{marginTop:10,
+                    style={{marginTop:50,
                         background:'linear-gradient(45deg,#2196F3 30%, #21CBF3 90%)',
                         color:'white'}}
-                    onClick={handleLogin}
-            > Giriş Yap </Button>
+                    onClick={handleRegister}
+            > Kayıt Ol </Button>
 
         </FormControl>
 </div>

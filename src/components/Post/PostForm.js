@@ -2,22 +2,23 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import { PostWithAuth } from "../../services/HttpService";
-import {InputAdornment, OutlinedInput, Snackbar} from "@mui/material";
+import { InputAdornment, OutlinedInput, Snackbar} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
 
 
 function PostForm(props) {
-    const {userId, refreshPosts} = props;
+    const {userId, userName , refreshPosts} = props;
 
     const [text, setText] = useState("");
     const [title, setTitle] = useState("");
     const [isSent, setIsSent] = useState(false);
 
-    const savePost = () => {
+    const savePost2 = () => {
         PostWithAuth("/posts", {
             title: title,
             userId : userId,
@@ -25,6 +26,25 @@ function PostForm(props) {
         })
             .then((res) => res.json())
             .catch((err) => console.log(err))
+    }
+    const savePost =() =>{
+        const token = localStorage.getItem("tokenKey");
+
+        fetch("/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token,
+            },
+            body: JSON.stringify({
+                title: title,
+                userId: userId,
+                text: text,
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => console.log(data))
+            .catch((err) => console.error(err));
     }
 
     const handleSubmit = () => {
@@ -64,9 +84,9 @@ function PostForm(props) {
                 <CardHeader
                     avatar={
                         <Link  to={{pathname : '/users/' + userId}}>
-                            {/*<Avatar aria-label="recipe" className={classes.avatar}>*/}
-                            {/*    {userName.charAt(0).toUpperCase()}*/}
-                            {/*</Avatar>*/}
+                            <Avatar aria-label="recipe" >
+                                {userName.charAt(0).toUpperCase()}
+                            </Avatar>
                         </Link>
                     }
                     title= {<OutlinedInput

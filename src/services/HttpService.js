@@ -1,16 +1,18 @@
 export const PostWithAuth = (url, body) => {
+    const token = localStorage.getItem("tokenKey");
+    console.log("Authorization Token:", token);
 
-    var request = fetch("/api"+url,  {
+    var request = fetch("/api" + url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization" : localStorage.getItem("tokenKey"),
+            "Authorization": token,
         },
-        body : JSON.stringify(body),
-    })
+        body: JSON.stringify(body),
+    });
 
-    return request
-}
+    return request;
+};
 
 export const PostWithoutAuth = (url, body) => {
 
